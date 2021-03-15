@@ -3,7 +3,6 @@ import SearchBar from "./SearchBar"
 import Table from "./Table"
 import Api from "../utils/Api"
 // need a Nav bar
-// api
 // table
 
 export default class Main extends Component {
