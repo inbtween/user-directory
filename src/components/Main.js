@@ -18,21 +18,32 @@ export default class Main extends Component {
           let values = Object.values(item).join("").toLowerCase()
           return values.indexOf(filter.toLowerCase()) !== -1
         })
-        this.setState({
-            filteredUsers: filteredList
-        })
+        // this.setState({
+        //     // filteredUsers: filteredList
+        // })
     }
     componentDidMount() {
         Api.getUsers().then(results => {
             console.log(results)
         
             this.setState({
-                users: results.data.results,
+                users: results.data.results.map((e, index) => ({
+                    picture: e.picture.large,
+                    firstName: e.name.first,
+                    lastName: e.name.last,
+                    email: e.email,
+                  })),
                 filteredUsers: results.data.results
             })
         }).catch(err => {
             console.log(err)
         })
+    }
+    reloadPage() {
+        window.location.reload(false);
+    }
+    searchUser = (filter) => {
+        console.log("")
     }
 
     render() {
@@ -40,7 +51,7 @@ export default class Main extends Component {
             <div>
                 <SearchBar/>
                 <div>
-                    <Table/>
+                    <Table users= {this.state.users}/>
                     
                 </div>
             </div>

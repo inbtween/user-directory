@@ -6,7 +6,7 @@ function SearchBar(props) {
     return (
         <form>
             <div class="form-group" style={{ display: "flex" }}>
-            <label for="search"></label>
+            <label htmlFor="search"></label>
             <input
             value={props.search}
             onChange={props.handleInputChange}
@@ -16,15 +16,11 @@ function SearchBar(props) {
             id="search" aria-describedby="searchHelp" placeholder="Search Employee"
             />
              <button onClick={props.handleFormSubmit} className="btn btn-primary">
-          Search
+            Search
             </button>
             <button onClick={props.refreshPage} className="btn btn-primary ml-1">
             Reset
             </button>
-            {/* <br /> */}
-
-
-
             </div>
         </form>
     )

@@ -2,7 +2,7 @@
 import React from 'react'
 
 
-function Table(props) {
+function Table({ users }) {
     return (
       <div>
     
@@ -17,13 +17,24 @@ function Table(props) {
     </tr>
   </thead>
   <tbody>
+      {users.map(user => {
+        return (<tr>
+          <th scope="row">
+            <img alt={user.firstName} src={user.picture} />
+          </th>
+          <td>{user.firstName}</td>
+          <td>{user.lastName}</td>
+          <td>{user.email}</td>
+        </tr>
+          )
+      })}
     <tr>
       <th scope="row">
-        <img alt={props.firstName} src={props.picture} />
+        <img alt={users.firstName} src={users.picture} />
       </th>
-      <td>{props.firstName}</td>
-      <td>{props.lastName}</td>
-      <td>{props.email}</td>
+      <td>{users.firstName}</td>
+      <td>{users.lastName}</td>
+      <td>{users.email}</td>
     </tr>
   </tbody>
 </table>
