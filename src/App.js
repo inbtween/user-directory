@@ -1,9 +1,14 @@
-// import logo from './logo.svg';
+
 import './App.css';
 import React from 'react';
-// import ReactDOM from 'react-dom';
+import Main from "./components/Main";
+import SearchBar from "./components/SearchBar";
+import Row from "./components/Row"
+import API from "./utils/Api"
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import './App.scss';
+// import Table from 'react-bootstrap/Table'
+import NavBar from "./components/Navbar"
+// import Table from "./components/Table";
 
 class App extends React.Component {
   constructor(){
@@ -13,47 +18,33 @@ class App extends React.Component {
     };
   }
 
-  componentWillMount() {
-    fetch('https://randomuser.me/api/?results=50')
-    .then(response => {
-      if(response.ok) return response.json();
-      throw new Error('Request failed.');
-    })
-    .then(data => {
-      this.setState({users: data.results});
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  }
-
   render() {
-    const list = this.state.users.map( (u, i) => {
-        return <User key={u.login.md5} name={`${u.name.first} ${u.name.last}`} email={u.email} />;
-    });
+    
     return (
-      <div>
-
-        <h1>My users are:</h1>
-        {list}
+      <div >
+       <NavBar/>
+       <Main/>
+        {/* <Table/> */}
+    
       </div>
     );
   }
 }
+
 
 class User extends React.Component {
   render() {
     return (
-      <div style={{'borderStyle': 'dotted'}}>
-        <h3>{this.props.name}</h3>
-        <p>{this.props.email}</p>
-      </div>
+      <>
+        <tr>
+        <td> <img alt={this.props.firstName} src={this.props.image} /> </td>
+      <td>{this.props.firstName}</td>
+      <td>{this.props.lastName}</td>
+      <td>{this.props.email}</td>
+     
+    </tr>
+    </>
     );
   }
 }
-
-// ReactDOM.render(
-//   <UserProfiles />,
-//   document.getElementById('root')
-// );
 export default App;

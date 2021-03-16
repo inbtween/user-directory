@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import SearchBar from "./SearchBar"
 import Table from "./Table"
 import Api from "../utils/Api"
-// need a Nav bar
+
 // table
 
 export default class Main extends Component {
@@ -24,11 +24,14 @@ export default class Main extends Component {
     }
     componentDidMount() {
         Api.getUsers().then(results => {
+            console.log(results)
         
             this.setState({
                 users: results.data.results,
                 filteredUsers: results.data.results
             })
+        }).catch(err => {
+            console.log(err)
         })
     }
 
@@ -38,9 +41,11 @@ export default class Main extends Component {
                 <SearchBar/>
                 <div>
                     <Table/>
+                    
                 </div>
             </div>
         )
     }
+   
 
 }
