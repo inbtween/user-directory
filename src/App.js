@@ -3,8 +3,8 @@ import './App.css';
 import React from 'react';
 import Main from "./components/Main";
 import SearchBar from "./components/SearchBar";
-import Row from "./components/Row"
-import API from "./utils/Api"
+// import Row from "./components/Row"
+// import API from "./utils/Api"
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Table from 'react-bootstrap/Table'
 import NavBar from "./components/Navbar"
@@ -14,19 +14,19 @@ class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      users: []
+      users: [],
+      filteredUsers: []
     };
   }
 
   render() {
-    
     return (
       <div >
        <NavBar/>
        {/* <SearchBar/> */}
        <Main/>
         {/* <Table/> */}
-    
+        
       </div>
     );
   }
@@ -42,7 +42,6 @@ class User extends React.Component {
       <td>{this.props.firstName}</td>
       <td>{this.props.lastName}</td>
       <td>{this.props.email}</td>
-     
     </tr>
     </>
     );

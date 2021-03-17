@@ -18,22 +18,25 @@ export default class Main extends Component {
           let values = Object.values(item).join("").toLowerCase()
           return values.indexOf(filter.toLowerCase()) !== -1
         })
-        // this.setState({
-        //     // filteredUsers: filteredList
-        // })
+        this.setState({
+            filteredUsers: filteredList
+        })
     }
     componentDidMount() {
         Api.getUsers().then(results => {
             console.log(results)
         
             this.setState({
-                users: results.data.results.map((e, index) => ({
+                users: results.data.results.map((e) => ({
                     picture: e.picture.large,
                     firstName: e.name.first,
                     lastName: e.name.last,
                     email: e.email,
                   })),
-                filteredUsers: results.data.results
+                filteredUsers: results.data.results.filter((e) => ({
+                    firstName: e.name.first,
+                    lastName: e.name.last
+                }))
             })
         }).catch(err => {
             console.log(err)
@@ -41,9 +44,6 @@ export default class Main extends Component {
     }
     reloadPage() {
         window.location.reload(false);
-    }
-    searchUser = (filter) => {
-        console.log("")
     }
 
     render() {

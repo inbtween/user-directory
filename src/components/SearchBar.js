@@ -1,6 +1,6 @@
 
-// import React, { Component } from 'react'
-import Form from "react-bootstrap/Form"
+import React from 'react'
+// import Form from "react-bootstrap/Form"
 
 function SearchBar(props) {
     return (
