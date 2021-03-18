@@ -5,22 +5,17 @@ import React from 'react'
 function SearchBar(props) {
     return (
         <form>
-            <div class="form-group" style={{ display: "flex" }}>
+            <div className="form-group" style={{ display: "flex" }}>
             <label htmlFor="search"></label>
             <input
             value={props.search}
-            onChange={props.handleInputChange}
+            onChange={e => props.handleSearchChange(e)}
             name="search"
             type="text"
             className="form-control"
             id="search" aria-describedby="searchHelp" placeholder="Search Employee"
             />
-             <button onClick={props.handleFormSubmit} className="btn btn-primary">
-            Search
-            </button>
-            <button onClick={props.refreshPage} className="btn btn-primary ml-1">
-            Reset
-            </button>
+
             </div>
         </form>
     )

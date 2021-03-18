@@ -3,6 +3,7 @@ import SearchBar from "./SearchBar"
 import Table from "./Table"
 import Api from "../utils/Api"
 
+
 // table
 
 export default class Main extends Component {
@@ -14,10 +15,13 @@ export default class Main extends Component {
     handleSearchChange = event => {
         console.log(event.target.value)
         const filter = event.target.value
+        console.log(filter)
         const filteredList = this.state.users.filter( item => {
-          let values = Object.values(item).join("").toLowerCase()
+          let values = Object.values(item.name).join("").toLowerCase()
+          console.log(values, item)
           return values.indexOf(filter.toLowerCase()) !== -1
         })
+        console.log(filteredList)
         this.setState({
             filteredUsers: filteredList
         })
@@ -25,33 +29,23 @@ export default class Main extends Component {
     componentDidMount() {
         Api.getUsers().then(results => {
             console.log(results)
-        
             this.setState({
-                users: results.data.results.map((e) => ({
-                    picture: e.picture.large,
-                    firstName: e.name.first,
-                    lastName: e.name.last,
-                    email: e.email,
-                  })),
-                filteredUsers: results.data.results.filter((e) => ({
-                    firstName: e.name.first,
-                    lastName: e.name.last
-                }))
+                users: results.data.results,
+                filteredUsers: results.data.results
             })
         }).catch(err => {
             console.log(err)
         })
     }
-    reloadPage() {
-        window.location.reload(false);
-    }
 
     render() {
         return (
             <div>
-                <SearchBar/>
+                <SearchBar handleSearchChange= {this.handleSearchChange} />
                 <div>
-                    <Table users= {this.state.users}/>
+                    <Table users= {this.state.filteredUsers}
+                    
+                    />
                     
                 </div>
             </div>

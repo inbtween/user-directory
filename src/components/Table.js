@@ -2,7 +2,7 @@
 import React from 'react'
 
 
-function Table({ users, filteredUsers }) {
+function Table({ users }) {
     return (
       <div>
     
@@ -17,18 +17,23 @@ function Table({ users, filteredUsers }) {
     </tr>
   </thead>
   <tbody>
-    {/* {users.filter(user => user.includes(user.firstName || user.lastName))} */}
-    
-      {users.map(user => {
-        return (<tr>
-          <th scope="row">
-            <img alt={user.firstName} src={user.picture} />
-          </th>
-          <td>{user.firstName}</td>
-          <td>{user.lastName}</td>
-          <td>{user.email}</td>
-        </tr>)
-      })},
+
+      {users[0] !== undefined && users[0].name !== undefined ? (
+        console.log(users),
+        users.map(user => {
+          // console.log(user)
+          return (<tr>
+            <th scope="row">
+              <img alt={user.name.first} src={user.picture.medium} />
+            </th>
+            <td>{user.name.first}</td>
+            <td>{user.name.last}</td>
+            <td>{user.email}</td>
+            </tr>)
+          })
+      ):(
+        <></>
+      )}
       
     <tr>
       

@@ -5,9 +5,9 @@
 // styling
 // sorting functionality, method .sort
 
-import React from 'react'
+import React, { Component } from 'react'
 
-export class TableBody extends Component {
+class TableBody extends Component {
     render() {
         return (
             <div>
@@ -17,4 +17,4 @@ export class TableBody extends Component {
     }
 }
 
-export default TableBody
+export default TableBody;
