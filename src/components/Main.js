@@ -38,27 +38,34 @@ export default class Main extends Component {
                  order: "ascend"
              })
          }
+         
          // 4.  compareOrder takes 2 parametes a, b -> if and else
          const compareOrder = (a, b) => {
-            if (this.state === "ascend") {
-                // if(heading === "name") {return a[heading].first.localeCompare(b[heading].first);}
-                if(a[heading] === "name") {
-                    return a[heading].first.localeCompare(b[heading].first)
-                } else {
-                    return b[heading] - a[heading]
-                }
-            } else {
-                if (this.state === "descend") {
-                    if(a[heading] === "name") {
-                        return b[heading].first.localeCompare(a[heading].first)
-                    } else {
-                        return b[heading] - a[heading]
-                    }
-                }
-            }
+            let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
+            if (nameA < nameB) //sort string ascending
+                return a.name.first.localeCompare(b.name.first)> -1 
+            if (nameA > nameB)
+                return a.name.first.localeCompare(b.name.first)> 1
+            return 0 //default return value (no sorting)
+            // if (this.state === "ascend") {
+            //     // if(heading === "name") {return a[heading].first.localeCompare(b[heading].first);}
+            //     if(a[heading] === "name") {
+            //         return a[heading].first.localeCompare(b[heading].first)
+            //     } else {                         
+            //         return b[heading] - a[heading]
+            //     }
+            // } else {
+            //     if (this.state === "descend") {
+            //         if(a[heading] === "name") {
+            //             return b[heading].first.localeCompare(a[heading].first)
+            //         } else {
+            //             return b[heading] - a[heading]
+            //         }
+            //     }
+            // }
          }
          // 5. const sortedUsers = this.state.filteredUsers.sort(compareOrder)
-         const sortedUsers = this.state.filteredUsers.sort(compareOrder)
+         const sortedUsers = this.state.filteredUsers.sort(compareOrder)          
 
          // 6. set state for sortedUsers 
          this.setState({
@@ -66,7 +73,7 @@ export default class Main extends Component {
          })
          
       }
-
+              
       sortByAsc() {
         this.setState(prevState => {
           this.state.filteredUsers.sort((a, b) => (a.name - b.name))
@@ -92,6 +99,7 @@ export default class Main extends Component {
         this.setState({
             filteredUsers: filteredList
         })
+        
     }
     componentDidMount() {
         Api.getUsers().then(results => {
