@@ -2,7 +2,7 @@
 import './App.css';
 import React from 'react';
 import Main from "./components/Main";
-import SearchBar from "./components/SearchBar";
+// import SearchBar from "./components/SearchBar";
 // import Row from "./components/Row"
 // import API from "./utils/Api"
 import 'bootstrap/dist/css/bootstrap.min.css';

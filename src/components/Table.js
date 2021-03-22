@@ -3,6 +3,7 @@ import React from 'react'
 
 
 function Table({ users }) {
+  
     return (
       <div>
     
@@ -17,7 +18,11 @@ function Table({ users }) {
     </tr>
   </thead>
   <tbody>
-
+  {/* <Main> */}
+ {/* <button onClick={a.localeCompare(b)}></button> */}
+  {/* </Main> */}
+ 
+          
       {users[0] !== undefined && users[0].name !== undefined ? (
         console.log(users),
         users.map(user => {
