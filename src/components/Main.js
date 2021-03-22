@@ -38,14 +38,11 @@ export default class Main extends Component {
                  order: "ascend"
              })
          }
-         
-       
          // 4.  compareOrder takes 2 parametes a, b -> if and else
          const compareOrder = (a, b) => {
             if (this.state === "ascend") {
-                // if(heading === "name") {
-//     return a[heading].first.localeCompare(b[heading].first);
-// }
+                // if(heading === "name") {return a[heading].first.localeCompare(b[heading].first);}
+
                 if(a[heading] === "name") {
                     return a[heading].first.localeCompare(b[heading].first)
                 } else {
@@ -125,13 +122,13 @@ export default class Main extends Component {
                 <SearchBar handleSearchChange= {this.handleSearchChange} />
                 <div>
                 <button onClick={this.sortByAsc}>
-            Ascend
-            </button>
-            <button onClick={this.sortByDesc}>
-            Descend
-            </button>
-                    <Table users= {this.state.filteredUsers} hadleSort={ this.handleSort}
-                    />
+                Ascend
+                </button>
+                <button onClick={this.sortByDesc}>
+                Descend
+                </button>
+                <Table users= {this.state.filteredUsers} handleSort={ this.handleSort}
+                />
                 </div>
             
             {/* <Main users= {this.state.filteredUsers.sortByDesc} /> */}
