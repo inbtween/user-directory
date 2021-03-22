@@ -25,8 +25,49 @@ export default class Main extends Component {
         
         this.sortByAsc = this.sortByAsc.bind(this);
         this.sortByDesc = this.sortByDesc.bind(this);
-        
       }
+      // 1. you need a handleSort function
+      handleSort = heading => () => {
+        // 2. check for the state of order -> updated the state 'des, asc'
+         if (this.state === "ascend") {
+            this.setState({
+                order: "descend"
+            })
+         } else {
+             this.setState({
+                 order: "ascend"
+             })
+         }
+         
+       
+         // 4.  compareOrder takes 2 parametes a, b -> if and else
+         const compareOrder = (a, b) => {
+            if (this.state === "ascend") {
+                // if(heading === "name") {
+//     return a[heading].first.localeCompare(b[heading].first);
+// }
+                if(a[heading] === "name") {
+                    return a[heading].first.localeCompare(b[heading].first)
+                } else {
+                    return b[heading] - a[heading]
+                }
+            } else {
+                if (this.state === "descend") {
+                    if(a[heading] === "name") {
+                        return b[heading].first.localeCompare(a[heading].first)
+                    } else {
+                        return b[heading] - a[heading]
+                    }
+                }
+            }
+         }
+         // 5. const sortedUsers = this.state.filteredUsers.sort(compareOrder)
+         // 6. set state for sortedUsers 
+
+
+
+      }
+
 
       sortByAsc() {
         this.setState(prevState => {
@@ -99,14 +140,5 @@ export default class Main extends Component {
 
 }
 
-// 1. you need a handleSort function
-// 2. check for the state of order -> updated the state 'des, asc'
-// 3. const sortedUsers = this.state.filteredUsers.sort(compareOrder)
-// 4.  compareOrder takes 2 parametes a, b -> if and else
 
-// if(heading == "name") {
-//     return a[heading].first.localeCompare(b[heading].first);
-// }
-
-// 5. set state for sortedUsers 
 
