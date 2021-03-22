@@ -12,12 +12,20 @@ export default class Main extends Component {
         super(props)
         this.state = {
             users: [],
+            order: "ascend",
             filteredUsers: [],
-            sortedUsers: []
+            sortedUsers: [],
+            heading: [
+                {name: "image"},
+                {name: "firstName"},
+                {name: "lastName"},
+                {name: "email"}
+            ]
           };
         
         this.sortByAsc = this.sortByAsc.bind(this);
         this.sortByDesc = this.sortByDesc.bind(this);
+        
       }
 
       sortByAsc() {
@@ -32,24 +40,16 @@ export default class Main extends Component {
       });
       }
 
-     
-    // state = {
-    //     users: [{}],
-    //     order: "descend",
-    //     filteredUsers: [{}],
-    //     sortedUsers: [{}]
-
-    // }
     handleSearchChange = event => {
         console.log(event.target.value)
         const filter = event.target.value
-        console.log(filter)
+        console.log("filter:", filter)
         const filteredList = this.state.users.filter( item => {
-          let values = Object.values(item.name).join("").toLowerCase()
-          console.log(values, item)
+            let values = Object.values(item).join("").toLowerCase()
+          console.log(`value: ${values}, item: ${item}`)
           return values.indexOf(filter.toLowerCase()) !== -1
         })
-        console.log(filteredList)
+        console.log("filteredList:::: ",filteredList)
         this.setState({
             filteredUsers: filteredList
         })
@@ -81,13 +81,32 @@ export default class Main extends Component {
             <div>
                 <SearchBar handleSearchChange= {this.handleSearchChange} />
                 <div>
-                    <Table users= {this.state.filteredUsers}
+                    <Table users= {this.state.filteredUsers} hadleSort={ this.handleSort}
                     />
-                    
                 </div>
+                <button onClick={this.sortByAsc}>
+            Ascend
+            </button>
+            <button onClick={this.sortByDesc}>
+            Descend
+            </button>
+            {/* <Main users= {this.state.filteredUsers.sortByDesc} /> */}
+                
             </div>
         )
     }
    
 
 }
+
+// 1. you need a handleSort function
+// 2. check for the state of order -> updated the state 'des, asc'
+// 3. const sortedUsers = this.state.filteredUsers.sort(compareOrder)
+// 4.  compareOrder takes 2 parametes a, b -> if and else
+
+// if(heading == "name") {
+//     return a[heading].first.localeCompare(b[heading].first);
+// }
+
+// 5. set state for sortedUsers 
+
