@@ -27,7 +27,7 @@ export default class Main extends Component {
         this.sortByDesc = this.sortByDesc.bind(this);
       }
       // 1. you need a handleSort function
-      handleSort = heading => () => {
+      handleSort = heading => {
         // 2. check for the state of order -> updated the state 'des, asc'
          if (this.state === "ascend") {
             this.setState({
@@ -42,7 +42,6 @@ export default class Main extends Component {
          const compareOrder = (a, b) => {
             if (this.state === "ascend") {
                 // if(heading === "name") {return a[heading].first.localeCompare(b[heading].first);}
-
                 if(a[heading] === "name") {
                     return a[heading].first.localeCompare(b[heading].first)
                 } else {
@@ -53,7 +52,7 @@ export default class Main extends Component {
                     if(a[heading] === "name") {
                         return b[heading].first.localeCompare(a[heading].first)
                     } else {
-                        return a[heading] - b[heading]
+                        return b[heading] - a[heading]
                     }
                 }
             }
@@ -65,18 +64,18 @@ export default class Main extends Component {
          this.setState({
              ...this.state, filteredUsers: sortedUsers
          })
+         
       }
-
 
       sortByAsc() {
         this.setState(prevState => {
-          this.state.users.sort((a, b) => (a.name - b.name))
+          this.state.filteredUsers.sort((a, b) => (a.name - b.name))
       });
       }
 
       sortByDesc() {
         this.setState(prevState => {
-          this.state.users.sort((a, b) => (b.name - a.name))
+          this.state.filteredUsers.sort((a, b) => (b.name - a.name))
       });
       }
 
