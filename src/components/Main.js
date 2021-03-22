@@ -56,7 +56,7 @@ export default class Main extends Component {
                     if(a[heading] === "name") {
                         return b[heading].first.localeCompare(a[heading].first)
                     } else {
-                        return b[heading] - a[heading]
+                        return a[heading] - b[heading]
                     }
                 }
             }
@@ -68,9 +68,6 @@ export default class Main extends Component {
          this.setState({
              ...this.state, filteredUsers: sortedUsers
          })
-
-
-
       }
 
 
@@ -127,15 +124,16 @@ export default class Main extends Component {
             <div>
                 <SearchBar handleSearchChange= {this.handleSearchChange} />
                 <div>
-                    <Table users= {this.state.filteredUsers} hadleSort={ this.handleSort}
-                    />
-                </div>
                 <button onClick={this.sortByAsc}>
             Ascend
             </button>
             <button onClick={this.sortByDesc}>
             Descend
             </button>
+                    <Table users= {this.state.filteredUsers} hadleSort={ this.handleSort}
+                    />
+                </div>
+            
             {/* <Main users= {this.state.filteredUsers.sortByDesc} /> */}
                 
             </div>
