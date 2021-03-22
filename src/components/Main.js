@@ -45,7 +45,7 @@ export default class Main extends Component {
             if (nameA < nameB) //sort string ascending
                 return a.name.first.localeCompare(b.name.first)> -1 
             if (nameA > nameB)
-                return a.name.first.localeCompare(b.name.first)> 1
+                return a.name.last.localeCompare(b.name.last)> 1
             return 0 //default return value (no sorting)
             // if (this.state === "ascend") {
             //     // if(heading === "name") {return a[heading].first.localeCompare(b[heading].first);}
@@ -76,13 +76,13 @@ export default class Main extends Component {
               
       sortByAsc() {
         this.setState(prevState => {
-          this.state.filteredUsers.sort((a, b) => (a.name - b.name))
+          this.state.filteredUsers.sort((a, b) => (a.name.first - b.name.first))
       });
       }
 
       sortByDesc() {
         this.setState(prevState => {
-          this.state.filteredUsers.sort((a, b) => (b.name - a.name))
+          this.state.filteredUsers.sort((a, b) => (b.name.last - a.name.last))
       });
       }
 
