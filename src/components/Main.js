@@ -62,7 +62,12 @@ export default class Main extends Component {
             }
          }
          // 5. const sortedUsers = this.state.filteredUsers.sort(compareOrder)
+         const sortedUsers = this.state.filteredUsers.sort(compareOrder)
+
          // 6. set state for sortedUsers 
+         this.setState({
+             ...this.state, filteredUsers: sortedUsers
+         })
 
 
 
