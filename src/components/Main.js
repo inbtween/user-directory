@@ -23,13 +23,11 @@ export default class Main extends Component {
             ]
           };
         
-        this.sortByAsc = this.sortByAsc.bind(this);
-        this.sortByDesc = this.sortByDesc.bind(this);
       }
       // 1. you need a handleSort function
       handleSort = heading => {
         // 2. check for the state of order -> updated the state 'des, asc'
-         if (this.state === "ascend") {
+         if (this.state.order === "ascend") {
             this.setState({
                 order: "descend"
             })
@@ -37,65 +35,45 @@ export default class Main extends Component {
              this.setState({
                  order: "ascend"
              })
+
+        // this.sortByAsc = this.sortByAsc.bind(this);
+        // this.sortByDesc = this.sortByDesc.bind(this);
          }
          
          // 4.  compareOrder takes 2 parametes a, b -> if and else
          const compareOrder = (a, b) => {
-            let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
-            if (nameA < nameB) //sort string ascending
-                return a.name.first.localeCompare(b.name.first)> -1 
-            if (nameA > nameB)
-                return a.name.last.localeCompare(b.name.last)> 1
-            return 0 //default return value (no sorting)
-            // if (this.state === "ascend") {
-            //     // if(heading === "name") {return a[heading].first.localeCompare(b[heading].first);}
-            //     if(a[heading] === "name") {
-            //         return a[heading].first.localeCompare(b[heading].first)
-            //     } else {                         
-            //         return b[heading] - a[heading]
-            //     }
-            // } else {
-            //     if (this.state === "descend") {
-            //         if(a[heading] === "name") {
-            //             return b[heading].first.localeCompare(a[heading].first)
-            //         } else {
-            //             return b[heading] - a[heading]
-            //         }
-            //     }
-            // }
+             console.log(this.state)
+            let nameA=a.name.last.toLowerCase(), nameB=b.name.last.toLowerCase()
+                if (this.state.order === "ascend")  {
+                    return a.name.last.localeCompare(b.name.last)
+                } else {
+                    return b.name.last.localeCompare(a.name.last)
+                }
+
          }
          // 5. const sortedUsers = this.state.filteredUsers.sort(compareOrder)
          const sortedUsers = this.state.filteredUsers.sort(compareOrder)          
 
-         // 6. set state for sortedUsers 
-         this.setState({
-             ...this.state, filteredUsers: sortedUsers
-         })
+         // 6. set state for sortedUsers
+            // console.log("setting state");
+            this.setState({
+            ...this.state, filteredUsers: sortedUsers,
+            });
+            console.log(this.state.filteredUsers)
          
       }
-              
-      sortByAsc() {
-        this.setState(prevState => {
-          this.state.filteredUsers.sort((a, b) => (a.name.first - b.name.first))
-      });
-      }
-
-      sortByDesc() {
-        this.setState(prevState => {
-          this.state.filteredUsers.sort((a, b) => (b.name.last - a.name.last))
-      });
-      }
+         
 
     handleSearchChange = event => {
-        console.log(event.target.value)
+        // console.log(event.target.value)
         const filter = event.target.value
-        console.log("filter:", filter)
+        // console.log("filter:", filter)
         const filteredList = this.state.users.filter( item => {
             let values = Object.values(item).join("").toLowerCase()
-          console.log(`value: ${values}, item: ${item}`)
+        //   console.log(`value: ${values}, item: ${item}`)
           return values.indexOf(filter.toLowerCase()) !== -1
         })
-        console.log("filteredList:::: ",filteredList)
+        // console.log("filteredList:::: ",filteredList)
         this.setState({
             filteredUsers: filteredList
         })
@@ -103,7 +81,7 @@ export default class Main extends Component {
     }
     componentDidMount() {
         Api.getUsers().then(results => {
-            console.log(results)
+            // console.log(results)
             this.setState({
                 users: results.data.results,
                 filteredUsers: results.data.results,
@@ -128,13 +106,8 @@ export default class Main extends Component {
             <div>
                 <SearchBar handleSearchChange= {this.handleSearchChange} />
                 <div>
-                <button onClick={this.sortByAsc}>
-                Ascend
-                </button>
-                <button onClick={this.sortByDesc}>
-                Descend
-                </button>
-                <Table users= {this.state.filteredUsers} handleSort={ this.handleSort}
+               
+                <Table users= {this.state.filteredUsers} handleSort={this.handleSort}
                 />
                 </div>
             

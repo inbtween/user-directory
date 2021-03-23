@@ -2,7 +2,7 @@
 import React from 'react'
 
 
-function Table({ users }) {
+function Table({ users, handleSort }) {
   
     return (
       <div>
@@ -13,7 +13,7 @@ function Table({ users }) {
     <tr>
       <th scope="col">Profile</th>
       <th scope="col">First</th>
-      <th scope="col">Last</th>
+      <th onClick={() => handleSort()}  scope="col">Last</th>
       <th scope="col">Email</th>
     </tr>
   </thead>
@@ -24,9 +24,9 @@ function Table({ users }) {
  
           
       {users[0] !== undefined && users[0].name !== undefined ? (
-        console.log(users),
+        
         users.map(user => {
-          // console.log(user)
+         
           return (<tr>
             <th scope="row">
               <img alt={user.name.first} src={user.picture.medium} />
